@@ -49,8 +49,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             elif scriptInputType == 'JSON':
                 data = rawData.decode('utf-8')
 
-            print('data before script is: ', data)
-
             # Run the script passing in the parameters
             data = scriptName.run(data, dictParameters)
 
