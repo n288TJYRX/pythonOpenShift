@@ -1,4 +1,5 @@
 import socket
+import struct
 from DataInputStream import DataInputStream
 
 HOST = socket.gethostbyname(socket.gethostname())
@@ -21,8 +22,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     conn, addr = s.accept()
     print('Connected to: ', addr)
     # Get the script name
+    print('Listening for script name...')
     dis = DataInputStream(conn)
     scriptName = dis.read_utf().decode('utf-8')
+    print('Script name is: ', scriptName)
     # Send back the right port number based on the script name
     port = getPort(scriptName)
-    conn.sendall(port.encode('UTF-8')) 
+    print('Sending port number: ', port)
+    conn.sendall(struct.pack('>H', len(port)))
+    conn.sendall(port.encode('utf-8'))
+    print('Sent port number.')
