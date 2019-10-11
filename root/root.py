@@ -8,7 +8,7 @@ print('Host is: ', HOST)
 
 def getPort(scriptName):
     return {
-        'script1': "37572",
+        'script1': "30631",
         'script2': "37462",
     }[scriptName]
 
